@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ScrollView, Text, View } from 'react-native'
 import { ArrowRightIcon } from 'react-native-heroicons/outline'
 import { colorCommon, PAPA_REACT_URL } from '../utils/constants'
 import RestaurantCard from './RestaurantCard'
 
 const FeaturedRow = ({ id, title, description }) => {
+
+  const [restaurants, setRestaurants] = useState([])
+
   return (
     <View>
       <View className='mt-4 flex-row items-center justify-between px-4'>
@@ -21,9 +24,28 @@ const FeaturedRow = ({ id, title, description }) => {
         showsHorizontalScrollIndicator={false}
         className='pt-4'
       >
+
+        {
+          restaurants?.map((restaurant) => (
+            <RestaurantCard
+              key={restaurant?._id}
+              id={restaurant?._id}
+              imgUrl={restaurant?.image}
+              title={restaurant?.name}
+              rating={restaurant?.rating}
+              genre={restaurant?.genre}
+              address={restaurant?.address}
+              short_description={restaurant?.short_description}
+              dishes={restaurant?.dishes}
+              long={20}
+              lat={10}
+            />
+          ))
+        }
+
         {/* restaurantCard */}
         <RestaurantCard
-          id='123'
+          id='12355'
           imgUrl={`${PAPA_REACT_URL}/gn7`}
           title='Hello Sushi'
           rating={4.5}
@@ -35,25 +57,25 @@ const FeaturedRow = ({ id, title, description }) => {
           lat={10}
         />
         <RestaurantCard
-          id='123'
+          id='1232'
           imgUrl={`${PAPA_REACT_URL}/gn7`}
           title='Hello Sushi'
           rating={4.5}
           genre='Japanese'
           address='Tokyu Japan'
-          short_description='Best Dish'
+          short_description='Best Dish in Night'
           dishes={[]}
           long={20}
           lat={10}
         />
         <RestaurantCard
-          id='123'
+          id='1233'
           imgUrl={`${PAPA_REACT_URL}/gn7`}
           title='Hello Sushi'
           rating={4.5}
           genre='Japanese'
-          address='Tokyu Japan'
-          short_description='Best Dish'
+          address='Tokyu Japan same'
+          short_description='Best Dish of Japan'
           dishes={[]}
           long={20}
           lat={10}

@@ -20,27 +20,20 @@ const HomeScreen = () => {
     })
   }, [])
 
-  // useEffect(() => {
-  //   client.fetch(`
-  //  *[_type == 'restaurant']{
-  //     ...,
-  //     }
-  //   `).then((data) => {
-  //     setFeaturedCategories(data)
-  //   })
-  // }, [])
 
   // const getData = async () => {
-  //   await fetch('https://i1yzm95p.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%20%3D%3D%20restaurant%5D%7B%0A...%2C%0A%7D').then((data) => {
-  //     setFeaturedCategories(data)
-  //   })
+  //   const data = await client.fetch(`*[_type == 'restaurant']{
+  //     ...,
+  //     }`
+  //   )
+  //   setFeaturedCategories(data)
   // }
 
   // useEffect(() => {
-  //   getData()
-  // }, [])
+  //   // getData()
+  // }, [getData])
 
-  console.log(featuredCategories, 'featuredCategories');
+  // console.log(featuredCategories, 'featuredCategories');
 
   return (
     <SafeAreaView className='bg-white pt-5'>
@@ -74,11 +67,25 @@ const HomeScreen = () => {
       </View>
 
       {/* ------------------------body----------------------- */}
-      <ScrollView>
+      <ScrollView className='bg-gray-100' contentContainerStyle={{
+        paddingBottom: 100
+      }}>
         {/* -----------------Categories----------------- */}
         <Categories />
 
         {/* -------------Featured Rows--------------- */}
+
+        {
+          featuredCategories?.map((category) => (
+            <FeaturedRow
+              key={category?._id}
+              id={category?._id}
+              title={category?.name}
+              description={category?.short_description}
+            />
+          ))
+        }
+
         <FeaturedRow
           title={'Featured'}
           description='Paid Placement from our partners'
