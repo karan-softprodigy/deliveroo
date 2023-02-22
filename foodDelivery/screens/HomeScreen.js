@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Image, TextInput, ScrollView } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { ChevronDownIcon, UserIcon, AdjustmentsVerticalIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
@@ -8,15 +8,39 @@ import Categories from '../components/Categories'
 import { PAPA_REACT_URL } from '../utils/constants'
 import FeaturedRow from '../components/FeaturedRow'
 import { colorCommon } from '../utils/constants'
+import client from '../sanity'
 
 const HomeScreen = () => {
   const navigation = useNavigation()
+  const [featuredCategories, setFeaturedCategories] = useState([])
 
   useEffect(() => {
     navigation.setOptions({
       headerShown: false
     })
   }, [])
+
+  // useEffect(() => {
+  //   client.fetch(`
+  //  *[_type == 'restaurant']{
+  //     ...,
+  //     }
+  //   `).then((data) => {
+  //     setFeaturedCategories(data)
+  //   })
+  // }, [])
+
+  // const getData = async () => {
+  //   await fetch('https://i1yzm95p.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%20%3D%3D%20restaurant%5D%7B%0A...%2C%0A%7D').then((data) => {
+  //     setFeaturedCategories(data)
+  //   })
+  // }
+
+  // useEffect(() => {
+  //   getData()
+  // }, [])
+
+  console.log(featuredCategories, 'featuredCategories');
 
   return (
     <SafeAreaView className='bg-white pt-5'>
