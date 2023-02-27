@@ -28,11 +28,14 @@ export const basketSlice = createSlice({
       state.items = newBasket;
 
     },
+    emptyBasket: (state, action) => {
+      state.items = []
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addToBasket, removeFromBasket } = basketSlice.actions
+export const { addToBasket, removeFromBasket, emptyBasket } = basketSlice.actions
 
 export const selectBasketItems = (state) => state?.basket?.items
 

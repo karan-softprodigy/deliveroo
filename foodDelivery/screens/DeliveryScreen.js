@@ -18,14 +18,14 @@ const DeliveryScreen = () => {
       <SafeAreaView className='z-50'>
         <View className='flex-row justify-between items-center p-5'>
           <TouchableOpacity onPress={() => navigation.navigate('Home')} >
-            <XMarkIcon color='white' size={30} />
+            <XMarkIcon color='black' size={30} />
           </TouchableOpacity>
-          <Text className='font-light text-white text-lg' >Order Help</Text>
+          <Text className='font-light text-black text-lg'>Order Help</Text>
         </View>
 
         <View className='bg-white mx-5 my-2 rounded-md p-6 z-50 shadow-md'>
           <View className='flex-row justify-between'>
-            <View>
+            <View className=''>
               <Text className='text-lg text-gray-400'>Estimated Arrival</Text>
               <Text className='text-4xl font-bold'>45-55 Minutes</Text>
             </View>
@@ -42,29 +42,29 @@ const DeliveryScreen = () => {
           </Text>
         </View>
       </SafeAreaView>
-      <MapView
+      {/* <MapView
         initialRegion={{
-          latitude: restaurant?.lat,
-          longitude: restaurant?.long,
-          latitudeDelta: 0.005,
-          longitudeDelta: 0.005
+          latitude: 37.78825,
+          longitude: -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
         }}
         className='flex-1 -mt-10 z-0'
         mapType='mutedStandard'
-      >
-        <Marker
+      /> */}
+      {/* <Marker
           coordinate={{
-            latitude: restaurant?.lat,
-            longitude: restaurant?.long
+            latitude: 30.710459,
+            longitude: 76.703347
           }}
           title={restaurant?.title}
           description={restaurant?.short_description}
           identifier='origin'
           pinColor={colorCommon}
         />
-      </MapView>
+      </MapView> */}
 
-      <SafeAreaView className='bg-white flex-row items-center space-x-5 h-28'>
+      <SafeAreaView className='bg-white flex-row items-center space-x-5 h-28 absolute bottom-0 w-full'>
         <Image
           source={{
             uri: `${PAPA_REACT_URL}/wru`

@@ -11,6 +11,7 @@ import { selectRestaurant } from '../features/restaurantSlice'
 import { urlFor } from '../sanity'
 import { colorCommon, PAPA_REACT_URL } from '../utils/constants'
 import Currency from 'react-currency-formatter'
+import { emptyBasket } from '../features/basketSlice'
 
 const BasketScreen = () => {
   const navigation = useNavigation()
@@ -107,7 +108,10 @@ const BasketScreen = () => {
           </View>
 
           <TouchableOpacity onPress={
-            () => navigation.navigate('PreparingOrderScreen')
+            () => {
+              dispatch(emptyBasket())
+              navigation.navigate('PreparingOrderScreen')
+            }
           } className='rounded-lg bg-[#00CCBB] p-4'>
             <Text className='text-center text-white text-lg font-bold'>Place Order</Text>
           </TouchableOpacity>
