@@ -1,5 +1,5 @@
-import React from 'react'
-import { Image, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
+import { Image, TouchableOpacity, View, Text } from 'react-native'
 import Currency from 'react-currency-formatter'
 import { urlFor } from '../sanity'
 import { MinusCircleIcon, PlusCircleIcon } from 'react-native-heroicons/outline'
@@ -35,7 +35,6 @@ const DishRow = ({
     dispatch(removeFromBasket({ id }))
   }
 
-
   return (
     <>
       <TouchableOpacity
@@ -50,11 +49,11 @@ const DishRow = ({
             </Text>
           </View>
           <View>
-            {/* <Image
+            <Image
               style={{ borderWidth: 1, borderColor: '#F3F3F4' }}
-              source={{ uri: urlFor(image).url() }}
+              source={{ uri: image }}
               className='h-20 w-20 bg-gray-300 p-4'
-            /> */}
+            />
           </View>
         </View>
 

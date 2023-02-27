@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Text, View, ScrollView } from 'react-native'
 import CategoriesCard from './CategoriesCard'
 import { PAPA_REACT_URL } from '../utils/constants'
+import { categoriesList } from '../utils/content'
 
 const Categories = () => {
+  const [categories, setCategories] = useState(categoriesList)
+
   return (
     <ScrollView
       contentContainerStyle={{
@@ -12,19 +15,13 @@ const Categories = () => {
       }}
       horizontal
       showsHorizontalScrollIndicator={false}>
-      <CategoriesCard
-        imgUrl={`${PAPA_REACT_URL}/gn7`} title='Testing' />
-      <CategoriesCard
-        imgUrl={`${PAPA_REACT_URL}/gn7`} title='Testing' />
-      <CategoriesCard
-        imgUrl={`${PAPA_REACT_URL}/gn7`} title='Testing' />
 
-      <CategoriesCard
-        imgUrl={`${PAPA_REACT_URL}/gn7`} title='Testing' />
-      <CategoriesCard
-        imgUrl={`${PAPA_REACT_URL}/gn7`} title='Testing' />
-      <CategoriesCard
-        imgUrl={`${PAPA_REACT_URL}/gn7`} title='Testing' />
+      {
+        categories?.map((category) => (
+          <CategoriesCard key={category.title}
+            imgUrl={category.image} title={category.title} />
+        ))
+      }
     </ScrollView>
   )
 }

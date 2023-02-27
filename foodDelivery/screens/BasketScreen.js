@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useMemo } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { XCircleIcon } from 'react-native-heroicons/outline'

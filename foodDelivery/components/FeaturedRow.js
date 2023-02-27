@@ -3,10 +3,13 @@ import { ScrollView, Text, View } from 'react-native'
 import { ArrowRightIcon } from 'react-native-heroicons/outline'
 import { colorCommon, PAPA_REACT_URL } from '../utils/constants'
 import RestaurantCard from './RestaurantCard'
+import { featuredRestaurants, nearRestaurantsList, discountRestaurantsList } from '../utils/content'
 
 const FeaturedRow = ({ id, title, description }) => {
 
-  const [restaurants, setRestaurants] = useState([])
+  const [featuredRestaurantsList, setFeaturedRestaurantsList] = useState(featuredRestaurants)
+  const [nearRestaurants, setNearRestaurants] = useState(nearRestaurantsList)
+  const [discountRestaurants, setDiscountRestaurants] = useState(discountRestaurantsList)
 
   return (
     <View>
@@ -26,60 +29,58 @@ const FeaturedRow = ({ id, title, description }) => {
       >
 
         {
-          restaurants?.map((restaurant) => (
+          id === 'featured' && featuredRestaurantsList?.map((restaurant) => (
             <RestaurantCard
-              key={restaurant?._id}
-              id={restaurant?._id}
+              key={restaurant?.id}
+              id={restaurant?.id}
               imgUrl={restaurant?.image}
-              title={restaurant?.name}
+              title={restaurant?.title}
               rating={restaurant?.rating}
               genre={restaurant?.genre}
               address={restaurant?.address}
               short_description={restaurant?.short_description}
               dishes={restaurant?.dishes}
-              long={20}
-              lat={10}
+              long={restaurant.long}
+              lat={restaurant.lat}
             />
           ))
         }
 
-        {/* restaurantCard */}
-        <RestaurantCard
-          id='12355'
-          imgUrl={`${PAPA_REACT_URL}/gn7`}
-          title='Hello Sushi'
-          rating={4.5}
-          genre='Japanese'
-          address='Tokyu Japan'
-          short_description='Best Dish'
-          dishes={[]}
-          long={20}
-          lat={10}
-        />
-        <RestaurantCard
-          id='1232'
-          imgUrl={`${PAPA_REACT_URL}/gn7`}
-          title='Hello Sushi'
-          rating={4.5}
-          genre='Japanese'
-          address='Tokyu Japan'
-          short_description='Best Dish in Night'
-          dishes={[]}
-          long={20}
-          lat={10}
-        />
-        <RestaurantCard
-          id='1233'
-          imgUrl={`${PAPA_REACT_URL}/gn7`}
-          title='Hello Sushi'
-          rating={4.5}
-          genre='Japanese'
-          address='Tokyu Japan same'
-          short_description='Best Dish of Japan'
-          dishes={[]}
-          long={20}
-          lat={10}
-        />
+        {
+          id === 'nearby' && nearRestaurants?.map((restaurant) => (
+            <RestaurantCard
+              key={restaurant?.id}
+              id={restaurant?.id}
+              imgUrl={restaurant?.image}
+              title={restaurant?.title}
+              rating={restaurant?.rating}
+              genre={restaurant?.genre}
+              address={restaurant?.address}
+              short_description={restaurant?.short_description}
+              dishes={restaurant?.dishes}
+              long={restaurant.long}
+              lat={restaurant.lat}
+            />
+          ))
+        }
+
+        {
+          id === 'discounts' && discountRestaurants?.map((restaurant) => (
+            <RestaurantCard
+              key={restaurant?.id}
+              id={restaurant?.id}
+              imgUrl={restaurant?.image}
+              title={restaurant?.title}
+              rating={restaurant?.rating}
+              genre={restaurant?.genre}
+              address={restaurant?.address}
+              short_description={restaurant?.short_description}
+              dishes={restaurant?.dishes}
+              long={restaurant.long}
+              lat={restaurant.lat}
+            />
+          ))
+        }
 
       </ScrollView>
     </View>

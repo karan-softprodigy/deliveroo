@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, TextInput, ScrollView } from 'react-native'
+import { View, Text, Image, TextInput, ScrollView, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { ChevronDownIcon, UserIcon, AdjustmentsVerticalIcon, MagnifyingGlassIcon } from 'react-native-heroicons/outline'
 // below import only works in android
@@ -8,32 +8,18 @@ import Categories from '../components/Categories'
 import { PAPA_REACT_URL } from '../utils/constants'
 import FeaturedRow from '../components/FeaturedRow'
 import { colorCommon } from '../utils/constants'
-import client from '../sanity'
+import { client } from '../sanity'
+import { featuredCategories } from '../utils/content'
 
 const HomeScreen = () => {
   const navigation = useNavigation()
-  const [featuredCategories, setFeaturedCategories] = useState([])
+  const [featuredTabs, setFeaturedTabs] = useState(featuredCategories)
 
   useEffect(() => {
     navigation.setOptions({
       headerShown: false
     })
   }, [])
-
-
-  // const getData = async () => {
-  //   const data = await client.fetch(`*[_type == 'restaurant']{
-  //     ...,
-  //     }`
-  //   )
-  //   setFeaturedCategories(data)
-  // }
-
-  // useEffect(() => {
-  //   // getData()
-  // }, [getData])
-
-  // console.log(featuredCategories, 'featuredCategories');
 
   return (
     <SafeAreaView className='bg-white pt-5'>
@@ -67,40 +53,24 @@ const HomeScreen = () => {
       </View>
 
       {/* ------------------------body----------------------- */}
-      <ScrollView className='bg-gray-100' contentContainerStyle={{
+      <ScrollView className='bg-gray-100 pb-3 mb-4' contentContainerStyle={{
         paddingBottom: 100
       }}>
         {/* -----------------Categories----------------- */}
         <Categories />
 
-        {/* -------------Featured Rows--------------- */}
+        {/* -------------all Rows--------------- */}
 
         {
-          featuredCategories?.map((category) => (
+          featuredTabs?.map((category) => (
             <FeaturedRow
-              key={category?._id}
-              id={category?._id}
-              title={category?.name}
-              description={category?.short_description}
+              key={category?.id}
+              id={category?.id}
+              title={category?.title}
+              description={category?.description}
             />
           ))
         }
-
-        <FeaturedRow
-          title={'Featured'}
-          description='Paid Placement from our partners'
-          id={'featured'}
-        />
-        <FeaturedRow
-          title={'Tasty Discounts'}
-          description='Paid Placement from our partners'
-          id={'discounts'}
-        />
-        <FeaturedRow
-          title={'Offers near you'}
-          description='why not support you local restaurant'
-          id={'offers'}
-        />
       </ScrollView>
 
     </SafeAreaView>
